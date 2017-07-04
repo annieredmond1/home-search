@@ -1,3 +1,46 @@
 body {
+  font-family: 'Roboto', sans-serif;
+  color: #757575;
+}
 
+#header {
+  background-color: rgba(226, 108, 106, 1);
+  color: #fff;
+}
+
+#search {
+  padding: 5em 1em;
+}
+
+.form-control {
+  height: 50px;
+  font-size: 16px;
+}
+
+.form-control:focus {
+  border: 1px solid #ccc;
+  box-shadow: none;
+}
+
+.btn {
+  outline: none !important;
+  background-color: rgba(226, 108, 106, 1) !important;
+  color: #fff !important;
+  text-transform: uppercase;
+  height: 50px;
+}
+
+.btn:hover {
+  background-color: rgba(226, 108, 106, 1) !important;
+  color: #fff !important;
+}
+
+.pending {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fa-spin {
+  color: rgba(226, 108, 106, 1);
 }

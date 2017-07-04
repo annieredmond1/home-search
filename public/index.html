@@ -8,16 +8,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="main.css" />
   </head>
-  <body ng-controller='searchController as search' cz-shortcut-listen="true">
+  <body ng-controller='searchController as search' cz-shortcut-listen="true" ng-cloak>
     <section id="header">
       <div class="container">
-        <h1 class="text-center">{{search.title}}</h1>
-        <hr>
-    </div></section>
+        <h1 class="text-center">Home Search</h1>
+      </div>
+    </section>
+    <section id="search">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="search.queryTerm" placeholder="Enter address...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="search.getResults()" ng-disabled="!search.queryTerm">Find Homes!</button>
+            </span>
+          </div>
+        </div>
+        <div class="col-sm-6 col-sm-offset-3" ng-if="search.pendingState">
+          <div class="pending">
+              <h3 class="text-center">Fetching Results for {{search.queryTerm}} ...</h3>
+              <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+              <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="results">
+      <div>
+        <h1 ng-if="search.searchResults">Results</h1>
+      </div>
+    </section>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/53e01a45ef.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="app.js"></script>
   </body>
