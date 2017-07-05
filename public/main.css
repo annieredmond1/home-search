@@ -3,6 +3,11 @@ body {
   color: #757575;
 }
 
+h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+}
+
 #header {
   background-color: rgba(226, 108, 106, 1);
   color: #fff;
@@ -43,4 +48,31 @@ body {
 
 .fa-spin {
   color: rgba(226, 108, 106, 1);
+}
+
+ul {
+  padding: 0;
+}
+
+.home__container {
+  list-style-type: none;
+  display: flex;
+  border: 1px solid #ccc;
+  margin: 2em;
+  text-transform: uppercase;
+}
+
+.home__container > div {
+  padding: 1em;
+}
+.price__container {
+  border-right: 1px solid #ccc;
+  min-width: 200px;
+  min-height: 100px;
+  background-color: rgba(226, 108, 106, 1);
+  color: #fff;
+}
+
+.home__details {
+    width: 100%;
 }

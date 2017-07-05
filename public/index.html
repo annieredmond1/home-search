@@ -21,9 +21,9 @@
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
           <div class="input-group">
-            <input type="text" class="form-control" ng-model="search.queryTerm" placeholder="Enter address...">
+            <input type="text" class="form-control" ng-model="search.queryTerm" placeholder="Where would you like to find a home?">
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button" ng-click="search.getResults()" ng-disabled="!search.queryTerm">Find Homes!</button>
+              <button class="btn btn-default" type="button" ng-click="search.getResults()">Find Homes!</button>
             </span>
           </div>
         </div>
@@ -38,7 +38,29 @@
     </section>
     <section id="results">
       <div>
-        <h1 ng-if="search.searchResults">Results</h1>
+        <h1 class="text-center" ng-if="search.homes">Homes for Sale</h1>
+        <ul>
+          <li class="home__container" ng-repeat="home in search.homes">
+            <div class="price__container">
+              <h1>{{home.price | currency: "$" : 0}}</h1>
+            </div>
+            <div class="home__details">
+              <a href='{{home.url}}'>{{home.address}}, {{home.city}} {{home.state}} {{home.zip}}</a>
+              <div class="row">
+                <div class="col-xs-6">
+                  <div ng-if="home.squareFeet">SQ FEET: {{home.squareFeet}}</div>
+                  <div ng-if="home.beds">BEDS: {{home.beds}}</div>
+                  <div ng-if="home.baths">BATHS: {{home.baths}}</div>
+                </div>
+                <div class="col-xs-6">
+                  <div ng-if="home.hoaFee">HOA FEES: {{home.hoaFee}}</div>
+                  <div ng-if="home.yearBuilt">YEAR BUILT: {{home.yearBuilt}}</div>
+                  <div ng-if="home.daysOnMarket">DAYS ON MARKET: {{home.daysOnMarket}}</div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </section>
 

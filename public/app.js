@@ -5,14 +5,15 @@ var homeSearch = angular.module('homeSearch', [
 
 homeSearch.controller('searchController', ['homesService', function(homesService) {
   var vm = this;
-  vm.queryTerm;
   vm.getResults = getResults;
 
   function getResults() {
-    vm.pendingState = true;
-    homesService.getSearchResults(vm.queryTerm)
+    // vm.pendingState = true;
+    if(vm.queryTerm) {
+      homesService.getSearchResults(vm.queryTerm)
       .then(function(response) {
         console.log(response.data);
+        vm.homes = response.data;
       })
       .catch(function(error) {
         console.log(error);
@@ -20,6 +21,7 @@ homeSearch.controller('searchController', ['homesService', function(homesService
       .finally(function(response) {
         vm.pendingState = false;
       })
+    }
   }
 }])
 

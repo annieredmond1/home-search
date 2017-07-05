@@ -14,11 +14,16 @@ app.get('/', function (req, res) {
 app.get('/api/homes', function(req, res) {
   var homes = [];
   csv
-    .fromPath('redfin_2017-07-02-15-47-37.csv', {headers: true})
+    .fromPath('redfin_2017-07-02-15-47-37.csv', {headers: ['saleType', 'soldDate', 'propertyType', 'address',
+                                                          'city', 'state', 'zip', 'price', 'beds', 'baths', 'location',
+                                                          'squareFeet', 'lotSize', 'yearBuilt', 'daysOnMarket',
+                                                          'pricePerSquareFoot', 'hoaFee', 'status', 'nextOpenHouseStart',
+                                                          'nextOpenHouseEnd', 'url', 'source', 'mlsNumber', 'favorite',
+                                                          'interested', 'lat', 'long']})
     .validate(function(data) {
-      return _.includes(data.ADDRESS.toLowerCase(), req.query.term.toLowerCase()) ||
-        _.includes(data.LOCATION.toLowerCase(), req.query.term.toLowerCase()) ||
-        _.includes([data.CITY.toLowerCase(), data.STATE.toLowerCase(), data.ZIP], req.query.term.toLowerCase());
+      return _.includes(data.address.toLowerCase(), req.query.term.toLowerCase()) ||
+        _.includes(data.location.toLowerCase(), req.query.term.toLowerCase()) ||
+        _.includes([data.city.toLowerCase(), data.state.toLowerCase(), data.zip], req.query.term.toLowerCase());
     })
     .on('data', function(data) {
       homes.push(data);
