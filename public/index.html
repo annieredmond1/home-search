@@ -14,53 +14,63 @@
   <body ng-controller='searchController as search' cz-shortcut-listen="true" ng-cloak>
     <section id="header">
       <div class="container">
-        <h1 class="text-center">Home Search</h1>
+        <h1 class="text-center heading">Home Search</h1>
+        <h3 class="text-center subheading">Find your dream home in San Francisco today!</h3>
       </div>
-    </section>
-    <section id="search">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
-          <div class="input-group">
-            <input type="text" class="form-control" ng-model="search.queryTerm" placeholder="Where would you like to find a home?">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button" ng-click="search.getResults()">Find Homes!</button>
-            </span>
-          </div>
-        </div>
-        <div class="col-sm-6 col-sm-offset-3" ng-if="search.pendingState">
-          <div class="pending">
-              <h3 class="text-center">Fetching Results for {{search.queryTerm}} ...</h3>
-              <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-              <span class="sr-only">Loading...</span>
-          </div>
+          <form name="searchForm" ng-submit="search.getResults()">
+            <div class="input-group">
+              <input type="text" class="form-control" ng-model="search.queryTerm" placeholder="Enter a neighborhood, address, or ZIP code">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Find Homes!
+                  <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw" ng-if="search.pendingState"></i>
+                  <span class="sr-only">Loading...</span>
+                </button>
+              </span>
+            </div>
+          </form>
         </div>
       </div>
     </section>
     <section id="results">
-      <div>
-        <h1 class="text-center" ng-if="search.homes">Homes for Sale</h1>
-        <ul>
-          <li class="home__container" ng-repeat="home in search.homes">
-            <div class="price__container">
-              <h1>{{home.price | currency: "$" : 0}}</h1>
-            </div>
-            <div class="home__details">
-              <a href='{{home.url}}'>{{home.address}}, {{home.city}} {{home.state}} {{home.zip}}</a>
-              <div class="row">
-                <div class="col-xs-6">
-                  <div ng-if="home.squareFeet">SQ FEET: {{home.squareFeet}}</div>
-                  <div ng-if="home.beds">BEDS: {{home.beds}}</div>
-                  <div ng-if="home.baths">BATHS: {{home.baths}}</div>
-                </div>
-                <div class="col-xs-6">
-                  <div ng-if="home.hoaFee">HOA FEES: {{home.hoaFee}}</div>
-                  <div ng-if="home.yearBuilt">YEAR BUILT: {{home.yearBuilt}}</div>
-                  <div ng-if="home.daysOnMarket">DAYS ON MARKET: {{home.daysOnMarket}}</div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="filter__container" ng-show="search.homes.length > 0">
+            <h3>Filter By:</h3><br>
+            <label>Beds:<br> <input ng-model="userFilter.beds"></label>
+            <label>Baths:<br> <input ng-model="userFilter.baths"></label>
+            <label>Neighborhood:<br> <input ng-model="userFilter.location"></label>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <h1 class="text-center" ng-if="search.homes.length > 0">Homes for Sale</h1>
+          <ul>
+            <li class="home__container" ng-repeat="home in search.homes | orderBy: 'price' | filter:userFilter:strict">
+              <div class="price__container">
+                <h1>{{home.price | currency: "$" : 0}}</h1>
+              </div>
+              <div class="home__details">
+                <a class='address' href='{{home.url}}' target="_blank"><h4>{{home.address}}, {{home.city}} {{home.state}} {{home.zip}}</h4></a>
+                <div class="row">
+                  <div class="col-xs-6">
+                    <div ng-if="home.squareFeet">SQ FEET: {{home.squareFeet}}</div>
+                    <div ng-if="home.beds">BEDS: {{home.beds}}</div>
+                    <div ng-if="home.baths">BATHS: {{home.baths}}</div>
+                  </div>
+                  <div class="col-xs-6">
+                    <div ng-if="home.hoaFee">HOA FEES: {{home.hoaFee}}</div>
+                    <div ng-if="home.yearBuilt">YEAR BUILT: {{home.yearBuilt}}</div>
+                    <div ng-if="home.daysOnMarket">DAYS ON MARKET: {{home.daysOnMarket}}</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+            <li ng-if="search.homes.length === 0">
+              <div class="subheading">No results found...</div>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -69,6 +79,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

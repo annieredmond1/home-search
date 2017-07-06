@@ -1,18 +1,15 @@
 'use strict'
-var homeSearch = angular.module('homeSearch', [
-
-])
+var homeSearch = angular.module('homeSearch', []);
 
 homeSearch.controller('searchController', ['homesService', function(homesService) {
   var vm = this;
   vm.getResults = getResults;
 
   function getResults() {
-    // vm.pendingState = true;
+    vm.pendingState = true;
     if(vm.queryTerm) {
       homesService.getSearchResults(vm.queryTerm)
       .then(function(response) {
-        console.log(response.data);
         vm.homes = response.data;
       })
       .catch(function(error) {

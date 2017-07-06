@@ -1,20 +1,38 @@
+/*for ng-cloak*/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   color: #757575;
 }
+
 
 h1, h2, h3, p {
   margin: 0;
   padding: 0;
 }
 
-#header {
-  background-color: rgba(226, 108, 106, 1);
-  color: #fff;
+.heading {
+  font-size: 56px;
+  margin-bottom: 1em;
 }
 
-#search {
-  padding: 5em 1em;
+.subheading {
+  font-size: 36px;
+}
+
+#header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://i.imgur.com/29eIU4V.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  min-height: 600px;
+  margin-bottom: 4em;
 }
 
 .form-control {
@@ -27,12 +45,17 @@ h1, h2, h3, p {
   box-shadow: none;
 }
 
+input {
+  outline: none;
+}
+
 .btn {
   outline: none !important;
   background-color: rgba(226, 108, 106, 1) !important;
   color: #fff !important;
   text-transform: uppercase;
   height: 50px;
+  font-size: 16px;
 }
 
 .btn:hover {
@@ -40,24 +63,18 @@ h1, h2, h3, p {
   color: #fff !important;
 }
 
-.pending {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.fa-spin {
-  color: rgba(226, 108, 106, 1);
-}
-
 ul {
   padding: 0;
 }
 
-.home__container {
+li {
   list-style-type: none;
+}
+
+.home__container {
   display: flex;
   border: 1px solid #ccc;
+  border-radius: 3px;
   margin: 2em;
   text-transform: uppercase;
 }
@@ -65,7 +82,11 @@ ul {
 .home__container > div {
   padding: 1em;
 }
+
 .price__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-right: 1px solid #ccc;
   min-width: 200px;
   min-height: 100px;
@@ -75,4 +96,24 @@ ul {
 
 .home__details {
     width: 100%;
+}
+
+.address {
+  color: rgba(226, 108, 106, 1);
+}
+
+.address:hover {
+  color: rgba(226, 108, 106, 1);
+}
+
+.filter__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter__container > label {
+  margin: 1em;
 }
