@@ -6,8 +6,8 @@ homeSearch.controller('searchController', ['homesService', function(homesService
   vm.getResults = getResults;
 
   function getResults() {
-    vm.pendingState = true;
     if(vm.queryTerm) {
+      vm.pendingState = true;
       homesService.getSearchResults(vm.queryTerm)
       .then(function(response) {
         vm.homes = response.data;
